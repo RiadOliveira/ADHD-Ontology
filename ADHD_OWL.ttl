@@ -1,0 +1,1790 @@
+@prefix : <http://adhd.com#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://adhd.com#> .
+
+<http://adhd.com> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://adhd.com#amplifiedBy
+:amplifiedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :ChildADHDSignal ;
+             rdfs:range :ADHDSignalIntensifier ;
+             rdfs:label "amplifiedBy"@en .
+
+
+###  http://adhd.com#attributedTo
+:attributedTo rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :ADHD ;
+              rdfs:range :PotentialCause .
+
+
+###  http://adhd.com#characterizedBy
+:characterizedBy rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain :ADHD ;
+                 rdfs:range :DSM5ADHDDiagnosticCriteria ;
+                 rdfs:label "characterizedBy"@en .
+
+
+###  http://adhd.com#classifiedBy
+:classifiedBy rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :ADHD ;
+              rdfs:range :ADHDClassification .
+
+
+###  http://adhd.com#composedOf
+:composedOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :Combined ;
+            rdfs:range [ owl:intersectionOf ( :PredominantHyperactivityimpulsivity
+                                              :PredominantInattention
+                                            ) ;
+                         rdf:type owl:Class
+                       ] .
+
+
+###  http://adhd.com#comprises
+:comprises rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain :DSM5ADHDDiagnosticCriteria ;
+           rdfs:range :DSM5ADHDValidSymptomCriteria ;
+           rdfs:label "comprises"@en .
+
+
+###  http://adhd.com#consumes
+:consumes rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :PatientWithADHD ;
+          rdfs:range :Drugs .
+
+
+###  http://adhd.com#definedBy
+:definedBy rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Combined
+                                       :PredominantHyperactivityimpulsivity
+                                       :PredominantInattention
+                                     )
+                       ] ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( :DSM5ADHDCombinedSymptom
+                                      :DSM5ADHDHyperactivityimpulsivitySymptom
+                                      :DSM5ADHDInattentionSymptom
+                                    )
+                      ] ;
+           rdfs:label "definedBy"@en .
+
+
+###  http://adhd.com#exhibits
+:exhibits rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :ChildWithADHD
+                                      :TeenAdultWithADHD
+                                    )
+                      ] ;
+          rdfs:range [ rdf:type owl:Class ;
+                       owl:unionOf ( :ChildADHDSignal
+                                     :TeenAdultADHDSignal
+                                   )
+                     ] .
+
+
+###  http://adhd.com#mediates
+:mediates rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://adhd.com#satisfiesCriterion
+:satisfiesCriterion rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain :Patient ;
+                    rdfs:range :DSM5ADHDDiagnosticCriteria .
+
+
+###  http://adhd.com#suffersFrom
+:suffersFrom rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :PatientWithADHD ;
+             rdfs:range :Dysfunction .
+
+
+###  http://adhd.com#vulnerableTo
+:vulnerableTo rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Patient ;
+              rdfs:range :ADHDRiskFactor .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://adhd.com#ageDiagnosed
+:ageDiagnosed rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :PatientWithADHD ;
+              rdfs:range xsd:integer .
+
+
+###  http://adhd.com#diagnosisDate
+:diagnosisDate rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :PatientWithADHD ;
+               rdfs:range xsd:dateTime .
+
+
+###  http://adhd.com#timesThatSelfMedicated
+:timesThatSelfMedicated rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:domain :PatientWithADHD ;
+                        rdfs:range xsd:integer .
+
+
+###  http://adhd.com#timesThatTookDrugs
+:timesThatTookDrugs rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :PatientWithADHD ;
+                    rdfs:range xsd:integer .
+
+
+###  http://adhd.com#treatmentStartDate
+:treatmentStartDate rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :PatientWithADHD ;
+                    rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://adhd.com#ADHD
+:ADHD rdf:type owl:Class ;
+      rdfs:subClassOf gufo:FunctionalComplex ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :attributedTo ;
+                        owl:someValuesFrom :PotentialCause
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :characterizedBy ;
+                        owl:someValuesFrom :DSM5ADHDDiagnosticCriteria
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :classifiedBy ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :ADHDClassification
+                      ] .
+
+
+###  http://adhd.com#ADHDClassification
+:ADHDClassification rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://adhd.com#ADHDRiskFactor
+:ADHDRiskFactor rdf:type owl:Class ;
+                rdfs:subClassOf gufo:Quality .
+
+
+###  http://adhd.com#ADHDSignalIntensifier
+:ADHDSignalIntensifier rdf:type owl:Class ;
+                       rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://adhd.com#AcademicActivities
+:AcademicActivities rdf:type owl:Class ;
+                    rdfs:subClassOf :ADHDSignalIntensifier ;
+                    owl:disjointWith :PresenceInTraditionalClasses .
+
+
+###  http://adhd.com#AcademicDeficiencies
+:AcademicDeficiencies rdf:type owl:Class ;
+                      rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#AdverseChildhoodExperiences
+:AdverseChildhoodExperiences rdf:type owl:Class ;
+                             rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#Aggressiveness
+:Aggressiveness rdf:type owl:Class ;
+                rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#Agitation
+:Agitation rdf:type owl:Class ;
+           rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#Alcohol
+:Alcohol rdf:type owl:Class ;
+         rdfs:subClassOf :FetalDrugExposure .
+
+
+###  http://adhd.com#Amphetamines
+:Amphetamines rdf:type owl:Class ;
+              rdfs:subClassOf :Illegal .
+
+
+###  http://adhd.com#Attention
+:Attention rdf:type owl:Class ;
+           rdfs:subClassOf :Dysfunction .
+
+
+###  http://adhd.com#AvoidsOrDislikesTasksRequiringSustainedMentalEffort
+:AvoidsOrDislikesTasksRequiringSustainedMentalEffort rdf:type owl:Class ;
+                                                     rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#BeMorePronouncedThanExpected
+:BeMorePronouncedThanExpected rdf:type owl:Class ;
+                              rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+
+
+###  http://adhd.com#BePresentBeforeAge12
+:BePresentBeforeAge12 rdf:type owl:Class ;
+                      rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+
+
+###  http://adhd.com#BePresentOftenFor6MonthsOrMore
+:BePresentOftenFor6MonthsOrMore rdf:type owl:Class ;
+                                rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+
+
+###  http://adhd.com#Behavioral
+:Behavioral rdf:type owl:Class ;
+            rdfs:subClassOf :PotentialCause .
+
+
+###  http://adhd.com#Biochemicals
+:Biochemicals rdf:type owl:Class ;
+              rdfs:subClassOf :PotentialCause .
+
+
+###  http://adhd.com#Caffeine
+:Caffeine rdf:type owl:Class ;
+          rdfs:subClassOf :Legal ;
+          owl:disjointWith :Nicotine .
+
+
+###  http://adhd.com#Cannabis
+:Cannabis rdf:type owl:Class ;
+          rdfs:subClassOf :Illegal .
+
+
+###  http://adhd.com#ChildADHDSignal
+:ChildADHDSignal rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:Quality ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :amplifiedBy ;
+                                   owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :ADHDSignalIntensifier
+                                 ] .
+
+
+###  http://adhd.com#ChildWithADHD
+:ChildWithADHD rdf:type owl:Class ;
+               rdfs:subClassOf :PatientWithADHD ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :exhibits ;
+                                 owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :ChildADHDSignal
+                               ] .
+
+
+###  http://adhd.com#Cocaine
+:Cocaine rdf:type owl:Class ;
+         rdfs:subClassOf :Illegal .
+
+
+###  http://adhd.com#Cocaine_1
+:Cocaine_1 rdf:type owl:Class ;
+           rdfs:subClassOf :FetalDrugExposure .
+
+
+###  http://adhd.com#CoexistenceOfLowIntelligence
+:CoexistenceOfLowIntelligence rdf:type owl:Class ;
+                              rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#Combined
+:Combined rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :PredominantHyperactivityimpulsivity
+                                                     :PredominantInattention
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] ;
+          rdfs:subClassOf :ADHDClassification ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :definedBy ;
+                            owl:someValuesFrom :DSM5ADHDCombinedSymptom
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :composedOf ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :PredominantHyperactivityimpulsivity
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :composedOf ;
+                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                            owl:onClass :PredominantInattention
+                          ] .
+
+
+###  http://adhd.com#Communication
+:Communication rdf:type owl:Class ;
+               rdfs:subClassOf :Dysfunction .
+
+
+###  http://adhd.com#DSM5ADHDCombinedSymptom
+:DSM5ADHDCombinedSymptom rdf:type owl:Class ;
+                         owl:equivalentClass [ owl:intersectionOf ( :DSM5ADHDHyperactivityimpulsivitySymptom
+                                                                    :DSM5ADHDInattentionSymptom
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ] ;
+                         rdfs:subClassOf :DSM5ADHDDiagnosticCriteria ,
+                                         gufo:Relator ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :mediates ;
+                                           owl:minQualifiedCardinality "6"^^xsd:nonNegativeInteger ;
+                                           owl:onClass :DSM5ADHDHyperactivityimpulsivitySymptom
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :mediates ;
+                                           owl:minQualifiedCardinality "6"^^xsd:nonNegativeInteger ;
+                                           owl:onClass :DSM5ADHDInattentionSymptom
+                                         ] .
+
+
+###  http://adhd.com#DSM5ADHDDiagnosticCriteria
+:DSM5ADHDDiagnosticCriteria rdf:type owl:Class ;
+                            rdfs:subClassOf gufo:Quality ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf :satisfiesCriterion
+                                                             ] ;
+                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :ChildWithADHD
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf :satisfiesCriterion
+                                                             ] ;
+                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :TeenAdultWithADHD
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :comprises ;
+                                              owl:qualifiedCardinality "5"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :DSM5ADHDValidSymptomCriteria
+                                            ] .
+
+
+###  http://adhd.com#DSM5ADHDHyperactivityimpulsivitySymptom
+:DSM5ADHDHyperactivityimpulsivitySymptom rdf:type owl:Class ;
+                                         rdfs:subClassOf :DSM5ADHDDiagnosticCriteria ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty [ owl:inverseOf :mediates
+                                                                          ] ;
+                                                           owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                           owl:onClass :DSM5ADHDCombinedSymptom
+                                                         ] .
+
+
+###  http://adhd.com#DSM5ADHDInattentionSymptom
+:DSM5ADHDInattentionSymptom rdf:type owl:Class ;
+                            rdfs:subClassOf :DSM5ADHDDiagnosticCriteria ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty [ owl:inverseOf :mediates
+                                                             ] ;
+                                              owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass :DSM5ADHDCombinedSymptom
+                                            ] .
+
+
+###  http://adhd.com#DSM5ADHDValidSymptomCriteria
+:DSM5ADHDValidSymptomCriteria rdf:type owl:Class ;
+                              rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://adhd.com#DeficientSocialSkills
+:DeficientSocialSkills rdf:type owl:Class ;
+                       rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#DifficultiesAssimilatingAppropriateSocialBehavior
+:DifficultiesAssimilatingAppropriateSocialBehavior rdf:type owl:Class ;
+                                                   rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#DifficultyMaintainingAttentionInTasksOrGames
+:DifficultyMaintainingAttentionInTasksOrGames rdf:type owl:Class ;
+                                              rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#DoesntSeemToListenWhenSpokenTo
+:DoesntSeemToListenWhenSpokenTo rdf:type owl:Class ;
+                                rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#Drugs
+:Drugs rdf:type owl:Class ;
+       rdfs:subClassOf gufo:FunctionalComplex ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty [ owl:inverseOf :mediates
+                                        ] ;
+                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :SelfMedication
+                       ] .
+
+
+###  http://adhd.com#Dysfunction
+:Dysfunction rdf:type owl:Class ;
+             rdfs:subClassOf gufo:Quality .
+
+
+###  http://adhd.com#EasilyDistracted
+:EasilyDistracted rdf:type owl:Class ;
+                  rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#FailsToFollowInstructionsOrCompleteTasks
+:FailsToFollowInstructionsOrCompleteTasks rdf:type owl:Class ;
+                                          rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#FetalDrugExposure
+:FetalDrugExposure rdf:type owl:Class ;
+                   rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#ForgetfulInDailyActivities
+:ForgetfulInDailyActivities rdf:type owl:Class ;
+                            rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted
+:FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted rdf:type owl:Class ;
+                                                         rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#FrequentlyFidgetsWithHandsOrFeet
+:FrequentlyFidgetsWithHandsOrFeet rdf:type owl:Class ;
+                                  rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#FrequentlyInterruptsOrIntrudesOnOthers
+:FrequentlyInterruptsOrIntrudesOnOthers rdf:type owl:Class ;
+                                        rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#GeneticFactors
+:GeneticFactors rdf:type owl:Class ;
+                rdfs:subClassOf :PotentialCause .
+
+
+###  http://adhd.com#HasDifficultyPlayingQuietly
+:HasDifficultyPlayingQuietly rdf:type owl:Class ;
+                             rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#HeadTrauma
+:HeadTrauma rdf:type owl:Class ;
+            rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#Illegal
+:Illegal rdf:type owl:Class ;
+         rdfs:subClassOf :Drugs ;
+         owl:disjointWith :Legal .
+
+
+###  http://adhd.com#Impulsiveness
+:Impulsiveness rdf:type owl:Class ;
+               rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#InattentionOrFrequantMistakesInSchoolOrEverydayTasks
+:InattentionOrFrequantMistakesInSchoolOrEverydayTasks rdf:type owl:Class ;
+                                                      rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#InterfereWithFunctioningAtHomeSchoolOrWork
+:InterfereWithFunctioningAtHomeSchoolOrWork rdf:type owl:Class ;
+                                            rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+
+
+###  http://adhd.com#IronDeficiency
+:IronDeficiency rdf:type owl:Class ;
+                rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#LeadExposure
+:LeadExposure rdf:type owl:Class ;
+              rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#Legal
+:Legal rdf:type owl:Class ;
+       rdfs:subClassOf :Drugs .
+
+
+###  http://adhd.com#Loneliness
+:Loneliness rdf:type owl:Class ;
+            rdfs:subClassOf :ChildADHDSignal ;
+            owl:disjointWith :SocialAndEmotionalImmaturity .
+
+
+###  http://adhd.com#LowBirthWeight
+:LowBirthWeight rdf:type owl:Class ;
+                rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#LowSelfEsteem
+:LowSelfEsteem rdf:type owl:Class ;
+               rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#Memory
+:Memory rdf:type owl:Class ;
+        rdfs:subClassOf :Dysfunction .
+
+
+###  http://adhd.com#Nicotine
+:Nicotine rdf:type owl:Class ;
+          rdfs:subClassOf :Legal .
+
+
+###  http://adhd.com#ObstructiveSleepApnea
+:ObstructiveSleepApnea rdf:type owl:Class ;
+                       rdfs:subClassOf :ADHDRiskFactor .
+
+
+###  http://adhd.com#OccurInAtLeast2Situations
+:OccurInAtLeast2Situations rdf:type owl:Class ;
+                           rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+
+
+###  http://adhd.com#OftenActsAsIfdrivenByAMotor
+:OftenActsAsIfdrivenByAMotor rdf:type owl:Class ;
+                             rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#OftenLosesItemsNeededForTasksOrActivities
+:OftenLosesItemsNeededForTasksOrActivities rdf:type owl:Class ;
+                                           rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#OftenMovesAroundTheClassroomOrOtherPlaces
+:OftenMovesAroundTheClassroomOrOtherPlaces rdf:type owl:Class ;
+                                           rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#OftenRunsOrClimbsExcessivelyInInappropriateSituations
+:OftenRunsOrClimbsExcessivelyInInappropriateSituations rdf:type owl:Class ;
+                                                       rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#OftenStrugglesToWait
+:OftenStrugglesToWait rdf:type owl:Class ;
+                      rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#Patient
+:Patient rdf:type owl:Class ;
+         rdfs:subClassOf gufo:FunctionalComplex ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :satisfiesCriterion ;
+                           owl:maxQualifiedCardinality "18"^^xsd:nonNegativeInteger ;
+                           owl:onClass :DSM5ADHDDiagnosticCriteria
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :vulnerableTo ;
+                           owl:maxQualifiedCardinality "7"^^xsd:nonNegativeInteger ;
+                           owl:onClass :ADHDRiskFactor
+                         ] .
+
+
+###  http://adhd.com#PatientWithADHD
+:PatientWithADHD rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :ADHD
+                                                            :Patient
+                                                            [ rdf:type owl:Class ;
+                                                              owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :exhibits ;
+                                                                              owl:maxQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                              owl:onClass :ChildADHDSignal
+                                                                            ]
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty :exhibits ;
+                                                                              owl:maxQualifiedCardinality "11"^^xsd:nonNegativeInteger ;
+                                                                              owl:onClass :TeenAdultADHDSignal
+                                                                            ]
+                                                                          )
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :suffersFrom ;
+                                                              owl:someValuesFrom :Dysfunction
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :consumes ;
+                                                              owl:maxQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :Drugs
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :vulnerableTo ;
+                                                              owl:maxQualifiedCardinality "7"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :ADHDRiskFactor
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :ADHD ,
+                                 :Patient ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :suffersFrom ;
+                                   owl:someValuesFrom :Dysfunction
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :satisfiesCriterion ;
+                                   owl:minQualifiedCardinality "6"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :DSM5ADHDDiagnosticCriteria
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :consumes ;
+                                   owl:maxQualifiedCardinality "5"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Drugs
+                                 ] .
+
+
+###  http://adhd.com#Perception
+:Perception rdf:type owl:Class ;
+            rdfs:subClassOf :Dysfunction .
+
+
+###  http://adhd.com#PersonalityDisordersAndAntisocialBehavior
+:PersonalityDisordersAndAntisocialBehavior rdf:type owl:Class ;
+                                           rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#Physiological
+:Physiological rdf:type owl:Class ;
+               rdfs:subClassOf :PotentialCause .
+
+
+###  http://adhd.com#PotentialCause
+:PotentialCause rdf:type owl:Class ;
+                rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://adhd.com#PredominantHyperactivityimpulsivity
+:PredominantHyperactivityimpulsivity rdf:type owl:Class ;
+                                     rdfs:subClassOf :ADHDClassification ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :definedBy ;
+                                                       owl:someValuesFrom :DSM5ADHDHyperactivityimpulsivitySymptom
+                                                     ] .
+
+
+###  http://adhd.com#PredominantInattention
+:PredominantInattention rdf:type owl:Class ;
+                        rdfs:subClassOf :ADHDClassification ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :definedBy ;
+                                          owl:someValuesFrom :DSM5ADHDInattentionSymptom
+                                        ] .
+
+
+###  http://adhd.com#PresenceInTraditionalClasses
+:PresenceInTraditionalClasses rdf:type owl:Class ;
+                              rdfs:subClassOf :ADHDSignalIntensifier .
+
+
+###  http://adhd.com#PsychopathologicalProblemsOfParents
+:PsychopathologicalProblemsOfParents rdf:type owl:Class ;
+                                     rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#SelfMedication
+:SelfMedication rdf:type owl:Class ;
+                rdfs:subClassOf gufo:Relator ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :mediates ;
+                                  owl:someValuesFrom :Drugs
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :mediates ;
+                                  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                  owl:onClass :PatientWithADHD
+                                ] .
+
+
+###  http://adhd.com#SensoriumMotors
+:SensoriumMotors rdf:type owl:Class ;
+                 rdfs:subClassOf :PotentialCause .
+
+
+###  http://adhd.com#SocialAndEmotionalImmaturity
+:SocialAndEmotionalImmaturity rdf:type owl:Class ;
+                              rdfs:subClassOf :ChildADHDSignal .
+
+
+###  http://adhd.com#SocialAndRelationshipProblems
+:SocialAndRelationshipProblems rdf:type owl:Class ;
+                               rdfs:subClassOf :TeenAdultADHDSignal .
+
+
+###  http://adhd.com#SocialInteraction
+:SocialInteraction rdf:type owl:Class ;
+                   rdfs:subClassOf :Dysfunction .
+
+
+###  http://adhd.com#StrugglesToOrganizeTasksOrActivities
+:StrugglesToOrganizeTasksOrActivities rdf:type owl:Class ;
+                                      rdfs:subClassOf :DSM5ADHDInattentionSymptom .
+
+
+###  http://adhd.com#TalksExcessively
+:TalksExcessively rdf:type owl:Class ;
+                  rdfs:subClassOf :DSM5ADHDHyperactivityimpulsivitySymptom .
+
+
+###  http://adhd.com#TeenAdultADHDSignal
+:TeenAdultADHDSignal rdf:type owl:Class ;
+                     rdfs:subClassOf gufo:Quality .
+
+
+###  http://adhd.com#TeenAdultWithADHD
+:TeenAdultWithADHD rdf:type owl:Class ;
+                   rdfs:subClassOf :PatientWithADHD ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :exhibits ;
+                                     owl:maxQualifiedCardinality "11"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :TeenAdultADHDSignal
+                                   ] .
+
+
+###  http://adhd.com#Tobacco
+:Tobacco rdf:type owl:Class ;
+         rdfs:subClassOf :FetalDrugExposure .
+
+
+###  http://purl.org/nemo/gufo#Category
+gufo:Category rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#FunctionalComplex
+gufo:FunctionalComplex rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Kind
+gufo:Kind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#MaterialRelationshipType
+gufo:MaterialRelationshipType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Mixin
+gufo:Mixin rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Quality
+gufo:Quality rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Relator
+gufo:Relator rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#SubKind
+gufo:SubKind rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://adhd.com#ADHD
+:ADHD rdf:type owl:NamedIndividual ,
+               gufo:Category .
+
+
+###  http://adhd.com#ADHDClassification
+:ADHDClassification rdf:type owl:NamedIndividual ,
+                             gufo:Kind .
+
+
+###  http://adhd.com#ADHDRiskFactor
+:ADHDRiskFactor rdf:type owl:NamedIndividual ,
+                         gufo:Kind .
+
+
+###  http://adhd.com#ADHDSignalIntensifier
+:ADHDSignalIntensifier rdf:type owl:NamedIndividual ,
+                                gufo:Kind .
+
+
+###  http://adhd.com#AcademicActivities
+:AcademicActivities rdf:type owl:NamedIndividual ,
+                             gufo:SubKind .
+
+
+###  http://adhd.com#AcademicDeficiencies
+:AcademicDeficiencies rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
+
+
+###  http://adhd.com#AdverseChildhoodExperiences
+:AdverseChildhoodExperiences rdf:type owl:NamedIndividual ,
+                                      gufo:SubKind .
+
+
+###  http://adhd.com#Aggressiveness
+:Aggressiveness rdf:type owl:NamedIndividual ,
+                         gufo:SubKind .
+
+
+###  http://adhd.com#Agitation
+:Agitation rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
+
+
+###  http://adhd.com#Alcohol
+:Alcohol rdf:type owl:NamedIndividual ,
+                  gufo:SubKind .
+
+
+###  http://adhd.com#Amphetamines
+:Amphetamines rdf:type owl:NamedIndividual ,
+                       :Illegal ,
+                       gufo:SubKind .
+
+
+###  http://adhd.com#Attention
+:Attention rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
+
+
+###  http://adhd.com#AvoidsOrDislikesTasksRequiringSustainedMentalEffort
+:AvoidsOrDislikesTasksRequiringSustainedMentalEffort rdf:type owl:NamedIndividual ,
+                                                              gufo:SubKind .
+
+
+###  http://adhd.com#BeMorePronouncedThanExpected
+:BeMorePronouncedThanExpected rdf:type owl:NamedIndividual ,
+                                       gufo:SubKind .
+
+
+###  http://adhd.com#BePresentBeforeAge12
+:BePresentBeforeAge12 rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
+
+
+###  http://adhd.com#BePresentOftenFor6MonthsOrMore
+:BePresentOftenFor6MonthsOrMore rdf:type owl:NamedIndividual ,
+                                         gufo:SubKind .
+
+
+###  http://adhd.com#Behavioral
+:Behavioral rdf:type owl:NamedIndividual ,
+                     gufo:SubKind .
+
+
+###  http://adhd.com#Biochemicals
+:Biochemicals rdf:type owl:NamedIndividual ,
+                       gufo:SubKind .
+
+
+###  http://adhd.com#Caffeine
+:Caffeine rdf:type owl:NamedIndividual ,
+                   :Legal ,
+                   gufo:SubKind .
+
+
+###  http://adhd.com#Cannabis
+:Cannabis rdf:type owl:NamedIndividual ,
+                   gufo:SubKind .
+
+
+###  http://adhd.com#ChildADHDSignal
+:ChildADHDSignal rdf:type owl:NamedIndividual ,
+                          gufo:Kind .
+
+
+###  http://adhd.com#ChildWithADHD
+:ChildWithADHD rdf:type owl:NamedIndividual ,
+                        gufo:Kind .
+
+
+###  http://adhd.com#ChildWithADHD1
+:ChildWithADHD1 rdf:type owl:NamedIndividual ,
+                         :ChildWithADHD ;
+                :attributedTo :GeneticFactors ;
+                :classifiedBy :PredominantInattention ;
+                :exhibits :Loneliness ;
+                :satisfiesCriterion :AvoidsOrDislikesTasksRequiringSustainedMentalEffort ,
+                                    :EasilyDistracted ,
+                                    :StrugglesToOrganizeTasksOrActivities ;
+                :suffersFrom :Memory ,
+                             :Perception ,
+                             :SocialInteraction ;
+                :ageDiagnosed 13 ;
+                :diagnosisDate "2024-01-25T15:00:00"^^xsd:dateTime ;
+                :timesThatSelfMedicated 3 ;
+                :treatmentStartDate "2024-10-01T15:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#ChildWithADHD2
+:ChildWithADHD2 rdf:type owl:NamedIndividual ,
+                         :ChildWithADHD ;
+                :attributedTo :SensoriumMotors ;
+                :classifiedBy :PredominantHyperactivityimpulsivity ;
+                :exhibits :SocialAndEmotionalImmaturity ;
+                :satisfiesCriterion :FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted ,
+                                    :FrequentlyFidgetsWithHandsOrFeet ;
+                :suffersFrom :Attention ;
+                :ageDiagnosed 12 ;
+                :diagnosisDate "2022-11-04T16:00:00"^^xsd:dateTime ;
+                :timesThatSelfMedicated 0 ;
+                :treatmentStartDate "2023-01-12T09:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#ChildWithADHD3
+:ChildWithADHD3 rdf:type owl:NamedIndividual ,
+                         :ChildWithADHD ;
+                :attributedTo :Physiological ;
+                :classifiedBy :Combined ;
+                :suffersFrom :Communication ;
+                :ageDiagnosed 11 ;
+                :diagnosisDate "2024-04-02T10:00:00"^^xsd:dateTime ;
+                :timesThatSelfMedicated 0 ;
+                :treatmentStartDate "2024-05-01T15:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#ChildWithADHD4
+:ChildWithADHD4 rdf:type owl:NamedIndividual ,
+                         :ChildWithADHD ;
+                :attributedTo :Behavioral ;
+                :classifiedBy :PredominantHyperactivityimpulsivity ;
+                :satisfiesCriterion :EasilyDistracted ,
+                                    :FrequentlyInterruptsOrIntrudesOnOthers ,
+                                    :HasDifficultyPlayingQuietly ;
+                :suffersFrom :Communication ,
+                             :Memory ;
+                :ageDiagnosed 9 ;
+                :diagnosisDate "2024-10-01T12:45:00"^^xsd:dateTime ;
+                :timesThatSelfMedicated 0 ;
+                :treatmentStartDate "2024-10-08T11:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#ChildWithADHD5
+:ChildWithADHD5 rdf:type owl:NamedIndividual ,
+                         :ChildWithADHD ;
+                :attributedTo :Biochemicals ;
+                :classifiedBy :PredominantInattention ;
+                :satisfiesCriterion :DoesntSeemToListenWhenSpokenTo ,
+                                    :FailsToFollowInstructionsOrCompleteTasks ;
+                :suffersFrom :Perception ;
+                :ageDiagnosed 11 ;
+                :diagnosisDate "2023-02-11T17:00:00"^^xsd:dateTime ;
+                :timesThatSelfMedicated 0 ;
+                :treatmentStartDate "2023-04-01T10:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#Cocaine
+:Cocaine rdf:type owl:NamedIndividual ,
+                  gufo:SubKind .
+
+
+###  http://adhd.com#Cocaine_1
+:Cocaine_1 rdf:type owl:NamedIndividual ,
+                    gufo:SubKind .
+
+
+###  http://adhd.com#CoexistenceOfLowIntelligence
+:CoexistenceOfLowIntelligence rdf:type owl:NamedIndividual ,
+                                       gufo:SubKind .
+
+
+###  http://adhd.com#Combined
+:Combined rdf:type owl:NamedIndividual ,
+                   gufo:SubKind .
+
+
+###  http://adhd.com#Communication
+:Communication rdf:type owl:NamedIndividual ,
+                        gufo:SubKind .
+
+
+###  http://adhd.com#DSM5ADHDCombinedSymptom
+:DSM5ADHDCombinedSymptom rdf:type owl:NamedIndividual ,
+                                  gufo:Kind .
+
+
+###  http://adhd.com#DSM5ADHDDiagnosticCriteria
+:DSM5ADHDDiagnosticCriteria rdf:type owl:NamedIndividual ,
+                                     gufo:Kind .
+
+
+###  http://adhd.com#DSM5ADHDHyperactivityimpulsivitySymptom
+:DSM5ADHDHyperactivityimpulsivitySymptom rdf:type owl:NamedIndividual ,
+                                                  gufo:SubKind .
+
+
+###  http://adhd.com#DSM5ADHDInattentionSymptom
+:DSM5ADHDInattentionSymptom rdf:type owl:NamedIndividual ,
+                                     gufo:SubKind .
+
+
+###  http://adhd.com#DSM5ADHDValidSymptomCriteria
+:DSM5ADHDValidSymptomCriteria rdf:type owl:NamedIndividual ,
+                                       gufo:Kind .
+
+
+###  http://adhd.com#DeficientSocialSkills
+:DeficientSocialSkills rdf:type owl:NamedIndividual ,
+                                gufo:SubKind .
+
+
+###  http://adhd.com#DifficultiesAssimilatingAppropriateSocialBehavior
+:DifficultiesAssimilatingAppropriateSocialBehavior rdf:type owl:NamedIndividual ,
+                                                            gufo:SubKind .
+
+
+###  http://adhd.com#DifficultyMaintainingAttentionInTasksOrGames
+:DifficultyMaintainingAttentionInTasksOrGames rdf:type owl:NamedIndividual ,
+                                                       gufo:SubKind .
+
+
+###  http://adhd.com#DoesntSeemToListenWhenSpokenTo
+:DoesntSeemToListenWhenSpokenTo rdf:type owl:NamedIndividual ,
+                                         gufo:SubKind .
+
+
+###  http://adhd.com#Drugs
+:Drugs rdf:type owl:NamedIndividual ,
+                gufo:Category .
+
+
+###  http://adhd.com#Dysfunction
+:Dysfunction rdf:type owl:NamedIndividual ,
+                      gufo:Kind .
+
+
+###  http://adhd.com#EasilyDistracted
+:EasilyDistracted rdf:type owl:NamedIndividual ,
+                           gufo:SubKind .
+
+
+###  http://adhd.com#FailsToFollowInstructionsOrCompleteTasks
+:FailsToFollowInstructionsOrCompleteTasks rdf:type owl:NamedIndividual ,
+                                                   gufo:SubKind .
+
+
+###  http://adhd.com#FetalDrugExposure
+:FetalDrugExposure rdf:type owl:NamedIndividual ,
+                            gufo:SubKind .
+
+
+###  http://adhd.com#ForgetfulInDailyActivities
+:ForgetfulInDailyActivities rdf:type owl:NamedIndividual ,
+                                     gufo:SubKind .
+
+
+###  http://adhd.com#FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted
+:FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted rdf:type owl:NamedIndividual ,
+                                                                  gufo:SubKind .
+
+
+###  http://adhd.com#FrequentlyFidgetsWithHandsOrFeet
+:FrequentlyFidgetsWithHandsOrFeet rdf:type owl:NamedIndividual ,
+                                           gufo:SubKind .
+
+
+###  http://adhd.com#FrequentlyInterruptsOrIntrudesOnOthers
+:FrequentlyInterruptsOrIntrudesOnOthers rdf:type owl:NamedIndividual ,
+                                                 gufo:SubKind .
+
+
+###  http://adhd.com#GeneticFactors
+:GeneticFactors rdf:type owl:NamedIndividual ,
+                         gufo:SubKind .
+
+
+###  http://adhd.com#HasDifficultyPlayingQuietly
+:HasDifficultyPlayingQuietly rdf:type owl:NamedIndividual ,
+                                      gufo:SubKind .
+
+
+###  http://adhd.com#HeadTrauma
+:HeadTrauma rdf:type owl:NamedIndividual ,
+                     gufo:SubKind .
+
+
+###  http://adhd.com#Illegal
+:Illegal rdf:type owl:NamedIndividual ,
+                  gufo:Kind .
+
+
+###  http://adhd.com#Impulsiveness
+:Impulsiveness rdf:type owl:NamedIndividual ,
+                        gufo:SubKind .
+
+
+###  http://adhd.com#InattentionOrFrequantMistakesInSchoolOrEverydayTasks
+:InattentionOrFrequantMistakesInSchoolOrEverydayTasks rdf:type owl:NamedIndividual ,
+                                                               gufo:SubKind .
+
+
+###  http://adhd.com#InterfereWithFunctioningAtHomeSchoolOrWork
+:InterfereWithFunctioningAtHomeSchoolOrWork rdf:type owl:NamedIndividual ,
+                                                     gufo:SubKind .
+
+
+###  http://adhd.com#IronDeficiency
+:IronDeficiency rdf:type owl:NamedIndividual ,
+                         gufo:SubKind .
+
+
+###  http://adhd.com#LeadExposure
+:LeadExposure rdf:type owl:NamedIndividual ,
+                       gufo:SubKind .
+
+
+###  http://adhd.com#Legal
+:Legal rdf:type owl:NamedIndividual ,
+                gufo:Kind .
+
+
+###  http://adhd.com#Loneliness
+:Loneliness rdf:type owl:NamedIndividual ,
+                     gufo:SubKind .
+
+
+###  http://adhd.com#LowBirthWeight
+:LowBirthWeight rdf:type owl:NamedIndividual ,
+                         gufo:SubKind .
+
+
+###  http://adhd.com#LowSelfEsteem
+:LowSelfEsteem rdf:type owl:NamedIndividual ,
+                        gufo:SubKind .
+
+
+###  http://adhd.com#Memory
+:Memory rdf:type owl:NamedIndividual ,
+                 gufo:SubKind .
+
+
+###  http://adhd.com#Nicotine
+:Nicotine rdf:type owl:NamedIndividual ,
+                   gufo:SubKind .
+
+
+###  http://adhd.com#ObstructiveSleepApnea
+:ObstructiveSleepApnea rdf:type owl:NamedIndividual ,
+                                gufo:SubKind .
+
+
+###  http://adhd.com#OccurInAtLeast2Situations
+:OccurInAtLeast2Situations rdf:type owl:NamedIndividual ,
+                                    gufo:SubKind .
+
+
+###  http://adhd.com#OftenActsAsIfdrivenByAMotor
+:OftenActsAsIfdrivenByAMotor rdf:type owl:NamedIndividual ,
+                                      gufo:SubKind .
+
+
+###  http://adhd.com#OftenLosesItemsNeededForTasksOrActivities
+:OftenLosesItemsNeededForTasksOrActivities rdf:type owl:NamedIndividual ,
+                                                    gufo:SubKind .
+
+
+###  http://adhd.com#OftenMovesAroundTheClassroomOrOtherPlaces
+:OftenMovesAroundTheClassroomOrOtherPlaces rdf:type owl:NamedIndividual ,
+                                                    gufo:SubKind .
+
+
+###  http://adhd.com#OftenRunsOrClimbsExcessivelyInInappropriateSituations
+:OftenRunsOrClimbsExcessivelyInInappropriateSituations rdf:type owl:NamedIndividual ,
+                                                                gufo:SubKind .
+
+
+###  http://adhd.com#OftenStrugglesToWait
+:OftenStrugglesToWait rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
+
+
+###  http://adhd.com#Patient
+:Patient rdf:type owl:NamedIndividual ,
+                  :Patient ,
+                  gufo:Category .
+
+
+###  http://adhd.com#PatientWithADHD
+:PatientWithADHD rdf:type owl:NamedIndividual ,
+                          gufo:Mixin .
+
+
+###  http://adhd.com#Perception
+:Perception rdf:type owl:NamedIndividual ,
+                     gufo:SubKind .
+
+
+###  http://adhd.com#PersonalityDisordersAndAntisocialBehavior
+:PersonalityDisordersAndAntisocialBehavior rdf:type owl:NamedIndividual ,
+                                                    gufo:SubKind .
+
+
+###  http://adhd.com#Physiological
+:Physiological rdf:type owl:NamedIndividual ,
+                        gufo:SubKind .
+
+
+###  http://adhd.com#PotentialCause
+:PotentialCause rdf:type owl:NamedIndividual ,
+                         gufo:Kind .
+
+
+###  http://adhd.com#PredominantHyperactivityimpulsivity
+:PredominantHyperactivityimpulsivity rdf:type owl:NamedIndividual ,
+                                              gufo:SubKind .
+
+
+###  http://adhd.com#PredominantInattention
+:PredominantInattention rdf:type owl:NamedIndividual ,
+                                 gufo:SubKind .
+
+
+###  http://adhd.com#PresenceInTraditionalClasses
+:PresenceInTraditionalClasses rdf:type owl:NamedIndividual ,
+                                       gufo:SubKind .
+
+
+###  http://adhd.com#PsychopathologicalProblemsOfParents
+:PsychopathologicalProblemsOfParents rdf:type owl:NamedIndividual ,
+                                              gufo:SubKind .
+
+
+###  http://adhd.com#SelfMedication
+:SelfMedication rdf:type owl:NamedIndividual ,
+                         gufo:Kind .
+
+
+###  http://adhd.com#SensoriumMotors
+:SensoriumMotors rdf:type owl:NamedIndividual ,
+                          gufo:SubKind .
+
+
+###  http://adhd.com#SocialAndEmotionalImmaturity
+:SocialAndEmotionalImmaturity rdf:type owl:NamedIndividual ,
+                                       gufo:SubKind .
+
+
+###  http://adhd.com#SocialAndRelationshipProblems
+:SocialAndRelationshipProblems rdf:type owl:NamedIndividual ,
+                                        gufo:SubKind .
+
+
+###  http://adhd.com#SocialInteraction
+:SocialInteraction rdf:type owl:NamedIndividual ,
+                            gufo:SubKind .
+
+
+###  http://adhd.com#StrugglesToOrganizeTasksOrActivities
+:StrugglesToOrganizeTasksOrActivities rdf:type owl:NamedIndividual ,
+                                               gufo:SubKind .
+
+
+###  http://adhd.com#TalksExcessively
+:TalksExcessively rdf:type owl:NamedIndividual ,
+                           gufo:SubKind .
+
+
+###  http://adhd.com#TeenAdultADHDSignal
+:TeenAdultADHDSignal rdf:type owl:NamedIndividual ,
+                              gufo:Kind .
+
+
+###  http://adhd.com#TeenAdultWithADHD
+:TeenAdultWithADHD rdf:type owl:NamedIndividual ,
+                            gufo:Kind .
+
+
+###  http://adhd.com#TeenAdultWithADHD1
+:TeenAdultWithADHD1 rdf:type owl:NamedIndividual ,
+                             :TeenAdultWithADHD ;
+                    :attributedTo :Biochemicals ;
+                    :classifiedBy :PredominantInattention ;
+                    :exhibits :DeficientSocialSkills ,
+                              :DifficultiesAssimilatingAppropriateSocialBehavior ,
+                              :LowSelfEsteem ;
+                    :satisfiesCriterion :ForgetfulInDailyActivities ,
+                                        :OftenLosesItemsNeededForTasksOrActivities ;
+                    :suffersFrom :Communication ,
+                                 :SocialInteraction ;
+                    :ageDiagnosed 16 ;
+                    :diagnosisDate "2023-03-11T08:00:00"^^xsd:dateTime ;
+                    :timesThatSelfMedicated 4 ;
+                    :treatmentStartDate "2023-11-22T15:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#TeenAdultWithADHD2
+:TeenAdultWithADHD2 rdf:type owl:NamedIndividual ,
+                             :TeenAdultWithADHD ;
+                    :attributedTo :Behavioral ;
+                    :classifiedBy :PredominantHyperactivityimpulsivity ;
+                    :exhibits :Impulsiveness ,
+                              :PersonalityDisordersAndAntisocialBehavior ;
+                    :satisfiesCriterion :InattentionOrFrequantMistakesInSchoolOrEverydayTasks ;
+                    :suffersFrom :Attention ;
+                    :ageDiagnosed 22 ;
+                    :diagnosisDate "2019-09-11T08:00:00"^^xsd:dateTime ;
+                    :timesThatSelfMedicated 18 ;
+                    :treatmentStartDate "2020-02-29T11:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#TeenAdultWithADHD3
+:TeenAdultWithADHD3 rdf:type owl:NamedIndividual ,
+                             :TeenAdultWithADHD ;
+                    :attributedTo :Physiological ;
+                    :classifiedBy :Combined ;
+                    :exhibits :Aggressiveness ,
+                              :SocialAndEmotionalImmaturity ;
+                    :suffersFrom :Attention ,
+                                 :Communication ,
+                                 :Perception ;
+                    :ageDiagnosed 41 ;
+                    :diagnosisDate "2002-07-11T11:45:00"^^xsd:dateTime ;
+                    :timesThatSelfMedicated 57 ;
+                    :treatmentStartDate "2003-07-11T15:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#TeenAdultWithADHD4
+:TeenAdultWithADHD4 rdf:type owl:NamedIndividual ,
+                             :TeenAdultWithADHD ;
+                    :attributedTo :SensoriumMotors ;
+                    :classifiedBy :PredominantHyperactivityimpulsivity ;
+                    :exhibits :AcademicDeficiencies ,
+                              :Agitation ,
+                              :CoexistenceOfLowIntelligence ;
+                    :suffersFrom :Memory ;
+                    :ageDiagnosed 32 ;
+                    :diagnosisDate "2014-09-07T09:00:00"^^xsd:dateTime ;
+                    :timesThatSelfMedicated 33 ;
+                    :treatmentStartDate "2017-10-08T15:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#TeenAdultWithADHD5
+:TeenAdultWithADHD5 rdf:type owl:NamedIndividual ,
+                             :TeenAdultWithADHD ;
+                    :attributedTo :GeneticFactors ;
+                    :classifiedBy :PredominantInattention ;
+                    :exhibits :Aggressiveness ,
+                              :Impulsiveness ,
+                              :PsychopathologicalProblemsOfParents ;
+                    :suffersFrom :Communication ,
+                                 :SocialInteraction ;
+                    :ageDiagnosed 18 ;
+                    :diagnosisDate "2020-03-14T08:00:00"^^xsd:dateTime ;
+                    :timesThatSelfMedicated 9 ;
+                    :treatmentStartDate "2021-08-07T11:00:00"^^xsd:dateTime .
+
+
+###  http://adhd.com#Tobacco
+:Tobacco rdf:type owl:NamedIndividual ,
+                  gufo:SubKind .
+
+
+###  http://adhd.com#consumes
+:consumes rdf:type owl:NamedIndividual ,
+                   gufo:MaterialRelationshipType .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:ADHD rdfs:label "ADHD"@en .
+
+
+:ADHDClassification rdfs:label "ADHD Classification"@en .
+
+
+:ADHDRiskFactor rdfs:label "ADHD risk factor"@en .
+
+
+:ADHDSignalIntensifier rdfs:label "ADHD signal intensifier"@en .
+
+
+:AcademicActivities rdfs:label "Academic activities"@en .
+
+
+:AcademicDeficiencies rdfs:label "Academic deficiencies"@en .
+
+
+:AdverseChildhoodExperiences rdfs:label "Adverse childhood experiences"@en .
+
+
+:Aggressiveness rdfs:label "Aggressiveness"@en .
+
+
+:Agitation rdfs:label "Agitation"@en .
+
+
+:Alcohol rdfs:label "Alcohol"@en .
+
+
+:Amphetamines rdfs:label "Amphetamines"@en .
+
+
+:Attention rdfs:label "Attention"@en .
+
+
+:AvoidsOrDislikesTasksRequiringSustainedMentalEffort rdfs:label "Avoids or dislikes tasks requiring sustained mental effort"@en .
+
+
+:BeMorePronouncedThanExpected rdfs:label "Be more pronounced than expected"@en .
+
+
+:BePresentBeforeAge12 rdfs:label "Be present before age 12"@en .
+
+
+:BePresentOftenFor6MonthsOrMore rdfs:label "Be present often for 6 months or more"@en .
+
+
+:Behavioral rdfs:label "Behavioral"@en .
+
+
+:Biochemicals rdfs:label "Biochemicals"@en .
+
+
+:Cannabis rdfs:label "Cannabis"@en .
+
+
+:ChildADHDSignal rdfs:label "Child ADHD signal"@en .
+
+
+:ChildWithADHD rdfs:label "Child with ADHD"@en .
+
+
+:Cocaine rdfs:label "Cocaine"@en .
+
+
+:Cocaine_1 rdfs:label "Cocaine"@en .
+
+
+:CoexistenceOfLowIntelligence rdfs:label "Coexistence of low intelligence"@en .
+
+
+:Combined rdfs:label "Combined"@en .
+
+
+:Communication rdfs:label "Communication"@en .
+
+
+:DSM5ADHDCombinedSymptom rdfs:label "DSM-5 ADHD combined symptom"@en .
+
+
+:DSM5ADHDDiagnosticCriteria rdfs:label "DSM-5 ADHD diagnostic criteria"@en .
+
+
+:DSM5ADHDHyperactivityimpulsivitySymptom rdfs:label "DSM-5 ADHD hyperactivity/impulsivity symptom"@en .
+
+
+:DSM5ADHDInattentionSymptom rdfs:label "DSM-5 ADHD inattention symptom"@en .
+
+
+:DSM5ADHDValidSymptomCriteria rdfs:label "DSM-5 ADHD valid symptom criteria"@en .
+
+
+:DeficientSocialSkills rdfs:label "Deficient social skills"@en .
+
+
+:DifficultiesAssimilatingAppropriateSocialBehavior rdfs:label "Difficulties assimilating appropriate social behavior"@en .
+
+
+:DifficultyMaintainingAttentionInTasksOrGames rdfs:label "Difficulty maintaining attention in tasks or games"@en .
+
+
+:DoesntSeemToListenWhenSpokenTo rdfs:label "Doesn't seem to listen when spoken to"@en .
+
+
+:Drugs rdfs:label "Drugs"@en .
+
+
+:Dysfunction rdfs:label "Dysfunction"@en .
+
+
+:EasilyDistracted rdfs:label "Easily distracted"@en .
+
+
+:FailsToFollowInstructionsOrCompleteTasks rdfs:label "Fails to follow instructions or complete tasks"@en .
+
+
+:FetalDrugExposure rdfs:label "Fetal drug exposure"@en .
+
+
+:ForgetfulInDailyActivities rdfs:label "Forgetful in daily activities"@en .
+
+
+:FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted rdfs:label "Frequently answers questions abruptly, before they're completed"@en .
+
+
+:FrequentlyFidgetsWithHandsOrFeet rdfs:label "Frequently fidgets with hands or feet"@en .
+
+
+:FrequentlyInterruptsOrIntrudesOnOthers rdfs:label "Frequently interrupts or intrudes on others"@en .
+
+
+:GeneticFactors rdfs:label "Genetic factors"@en .
+
+
+:HasDifficultyPlayingQuietly rdfs:label "Has difficulty playing quietly"@en .
+
+
+:HeadTrauma rdfs:label "Head trauma"@en .
+
+
+:Illegal rdfs:label "Illegal"@en .
+
+
+:Impulsiveness rdfs:label "Impulsiveness"@en .
+
+
+:InattentionOrFrequantMistakesInSchoolOrEverydayTasks rdfs:label "Inattention or frequant mistakes in school or everyday tasks"@en .
+
+
+:InterfereWithFunctioningAtHomeSchoolOrWork rdfs:label "Interfere with functioning at home, school, or work"@en .
+
+
+:IronDeficiency rdfs:label "Iron deficiency"@en .
+
+
+:LeadExposure rdfs:label "Lead exposure"@en .
+
+
+:Legal rdfs:label "Legal"@en .
+
+
+:Loneliness rdfs:label "Loneliness"@en .
+
+
+:LowBirthWeight rdfs:label "Low birth weight"@en .
+
+
+:LowSelfEsteem rdfs:label "Low self-esteem"@en .
+
+
+:Memory rdfs:label "Memory"@en .
+
+
+:Nicotine rdfs:label "Nicotine"@en .
+
+
+:ObstructiveSleepApnea rdfs:label "Obstructive sleep apnea"@en .
+
+
+:OccurInAtLeast2Situations rdfs:label "Occur in at least 2 situations"@en .
+
+
+:OftenActsAsIfdrivenByAMotor rdfs:label "Often acts as if \"driven by a motor\""@en .
+
+
+:OftenLosesItemsNeededForTasksOrActivities rdfs:label "Often loses items needed for tasks or activities"@en .
+
+
+:OftenMovesAroundTheClassroomOrOtherPlaces rdfs:label "Often moves around the classroom or other places"@en .
+
+
+:OftenRunsOrClimbsExcessivelyInInappropriateSituations rdfs:label "Often runs or climbs excessively in inappropriate situations"@en .
+
+
+:OftenStrugglesToWait rdfs:label "Often struggles to wait"@en .
+
+
+:Patient rdfs:label "Patient"@en .
+
+
+:PatientWithADHD rdfs:label "Patient With ADHD"@en .
+
+
+:Perception rdfs:label "Perception"@en .
+
+
+:PersonalityDisordersAndAntisocialBehavior rdfs:label "Personality disorders and antisocial behavior"@en .
+
+
+:Physiological rdfs:label "Physiological"@en .
+
+
+:PotentialCause rdfs:label "Potential cause"@en .
+
+
+:PredominantHyperactivityimpulsivity rdfs:label "Predominant hyperactivity/impulsivity"@en .
+
+
+:PredominantInattention rdfs:label "Predominant inattention"@en .
+
+
+:PresenceInTraditionalClasses rdfs:label "Presence in traditional classes"@en .
+
+
+:PsychopathologicalProblemsOfParents rdfs:label "Psychopathological problems of parents"@en .
+
+
+:SelfMedication rdfs:label "Self-medication"@en .
+
+
+:SensoriumMotors rdfs:label "Sensorium motors"@en .
+
+
+:SocialAndEmotionalImmaturity rdfs:label "Social and emotional immaturity"@en .
+
+
+:SocialAndRelationshipProblems rdfs:label "Social and relationship problems"@en .
+
+
+:SocialInteraction rdfs:label "Social interaction"@en .
+
+
+:StrugglesToOrganizeTasksOrActivities rdfs:label "Struggles to organize tasks or activities"@en .
+
+
+:TalksExcessively rdfs:label "Talks excessively"@en .
+
+
+:TeenAdultADHDSignal rdfs:label "Teen/Adult ADHD signal"@en .
+
+
+:TeenAdultWithADHD rdfs:label "Teen/Adult with ADHD"@en .
+
+
+:Tobacco rdfs:label "Tobacco"@en .
+
+
+:consumes rdfs:label "consumes"@en .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AcademicDeficiencies
+                :Aggressiveness
+                :Agitation
+                :CoexistenceOfLowIntelligence
+                :DeficientSocialSkills
+                :DifficultiesAssimilatingAppropriateSocialBehavior
+                :Impulsiveness
+                :LowSelfEsteem
+                :PersonalityDisordersAndAntisocialBehavior
+                :PsychopathologicalProblemsOfParents
+                :SocialAndRelationshipProblems
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AdverseChildhoodExperiences
+                :FetalDrugExposure
+                :HeadTrauma
+                :IronDeficiency
+                :LeadExposure
+                :LowBirthWeight
+                :ObstructiveSleepApnea
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Alcohol
+                :Cocaine_1
+                :Tobacco
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Amphetamines
+                :Cannabis
+                :Cocaine
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Attention
+                :Communication
+                :Memory
+                :Perception
+                :SocialInteraction
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AvoidsOrDislikesTasksRequiringSustainedMentalEffort
+                :DifficultyMaintainingAttentionInTasksOrGames
+                :DoesntSeemToListenWhenSpokenTo
+                :EasilyDistracted
+                :FailsToFollowInstructionsOrCompleteTasks
+                :ForgetfulInDailyActivities
+                :InattentionOrFrequantMistakesInSchoolOrEverydayTasks
+                :OftenLosesItemsNeededForTasksOrActivities
+                :StrugglesToOrganizeTasksOrActivities
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BeMorePronouncedThanExpected
+                :BePresentBeforeAge12
+                :BePresentOftenFor6MonthsOrMore
+                :InterfereWithFunctioningAtHomeSchoolOrWork
+                :OccurInAtLeast2Situations
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Behavioral
+                :Biochemicals
+                :GeneticFactors
+                :Physiological
+                :SensoriumMotors
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :FrequentlyAnswersQuestionsAbruptlyBeforeTheyreCompleted
+                :FrequentlyFidgetsWithHandsOrFeet
+                :FrequentlyInterruptsOrIntrudesOnOthers
+                :HasDifficultyPlayingQuietly
+                :OftenActsAsIfdrivenByAMotor
+                :OftenMovesAroundTheClassroomOrOtherPlaces
+                :OftenRunsOrClimbsExcessivelyInInappropriateSituations
+                :OftenStrugglesToWait
+                :TalksExcessively
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
