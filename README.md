@@ -95,3 +95,105 @@ CQ5 - Which patients have self-medicated?
 CQ6 - What symptoms does the patient have?
 
 CQ7 - How many patients were diagnosed in childhood?
+
+CQ8 - Which patients have ADHD attributed to a specific potential cause?
+
+CQ9 - What are the risk factors a patient is vulnerable to?
+
+## SPARQL Queries
+
+- CQ1:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?adhdType
+WHERE {
+  :ChildWithADHD1 :classifiedBy ?adhdType
+}
+```
+
+- CQ2:
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://adhd.com#>
+
+SELECT ?characteristic
+WHERE {
+  ?characteristic rdfs:subClassOf :DSM5ADHDValidSymptomCriteria .
+}
+```
+
+- CQ3:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?signs
+WHERE {
+  :TeenAdultWithADHD1 :exhibits ?signs
+}
+```
+
+- CQ4:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?dysfunctions
+WHERE {
+  :TeenAdultWithADHD1 :suffersFrom ?dysfunctions
+}
+```
+
+- CQ5:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?patient ?times
+WHERE {
+  ?patient :timesThatSelfMedicated ?times
+  FILTER (?times > 0)
+}
+```
+
+- CQ6:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?symptons
+WHERE {
+  :ChildWithADHD1 :satisfiesCriterion ?symptons
+}
+```
+
+- CQ7:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT (COUNT(?patient) AS ?patientsQuantity)
+WHERE {
+  ?patient a :PatientWithADHD ;
+            :ageDiagnosed ?ageDiagnosed .
+  
+  FILTER(?ageDiagnosed < 14)
+}
+```
+
+- CQ8:
+```
+PREFIX : <http://adhd.com#>
+
+SELECT ?patient
+WHERE {
+  ?patient :attributedTo :Behavioral .
+}
+```
+
+- CQ9:
+```
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://adhd.com#>
+
+SELECT ?riskFactor
+WHERE {
+  ?riskFactor rdfs:subClassOf :ADHDRiskFactor .
+}
+```
