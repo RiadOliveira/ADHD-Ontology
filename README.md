@@ -82,7 +82,7 @@ NFR2 - The ontology must be made available as open-source on a GitHub repository
 
 ## Functional requirements
 
-CQ1 - Which patients have a specific type of ADHD?
+CQ1 - What type of ADHD does a patient have?
 
 CQ2 - What symptom characteristics make up the DSM-5 diagnostic criteria for ADHD?
 
@@ -92,7 +92,7 @@ CQ4 - What dysfunctions does a patient with ADHD suffer from?
 
 CQ5 - Which patients have self-medicated?
 
-CQ6 - What symptoms does the patient have?
+CQ6 - What symptoms does a patient have?
 
 CQ7 - How many patients were diagnosed in childhood?
 
